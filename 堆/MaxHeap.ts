@@ -33,7 +33,8 @@ class MaxHeap {
     this.shiftUp(this.count)
   }
   public extractMax(): any {
-    if (this.count === 0) console.error('无可取出的元素')
+    if (this.count === 0)
+      throw new Error('无可取出的元素')
     const ret = this.data[1]
     this.swap(1, this.count)
     this.count--
