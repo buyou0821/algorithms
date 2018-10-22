@@ -1,8 +1,15 @@
-// tsc MaxHeap.ts --lib dom,es6 && node MaxHeap.js
+/**
+ * 数组索引从1开始
+ * parent(i) = Math.floor(i / 2)
+ * leftchild(i) = 2 * i
+ * rightChild(i) = 2 * i + 1
+ * 最后一个非叶子节点 = parent(count)
+ */
+// tsc MaxHeap.ts --lib dom,es6 -d && node MaxHeap.js
 var MaxHeap = /** @class */ (function () {
     function MaxHeap(array) {
         if (array) {
-            this.constructorByArray(array);
+            this.heapify(array);
         }
         else {
             this.constructorDefault();
@@ -12,7 +19,8 @@ var MaxHeap = /** @class */ (function () {
         this.count = 0;
         this.data = [];
     };
-    MaxHeap.prototype.constructorByArray = function (array) {
+    // heapify
+    MaxHeap.prototype.heapify = function (array) {
         this.data = Array.from({ length: 1 }).concat(array);
         this.count = array.length;
         for (var i = this.getParentIndex(this.count); i >= 1; i--) {
@@ -32,7 +40,7 @@ var MaxHeap = /** @class */ (function () {
     };
     MaxHeap.prototype.extractMax = function () {
         if (this.count === 0)
-            console.error('无可取出的元素');
+            throw new Error('无可取出的元素');
         var ret = this.data[1];
         this.swap(1, this.count);
         this.count--;

@@ -1,11 +1,17 @@
-// 优先队列
+/**
+ * 数组索引从1开始
+ * parent(i) = Math.floor(i / 2)
+ * leftchild(i) = 2 * i
+ * rightChild(i) = 2 * i + 1
+ * 最后一个非叶子节点 = parent(count)
+ */
 // tsc MaxHeap.ts --lib dom,es6 -d && node MaxHeap.js
 class MaxHeap {
   private data: Array <any>
   private count: number
   constructor(array?) {
     if (array) {
-      this.constructorByArray(array)
+      this.heapify(array)
     } else {
       this.constructorDefault()
     }
@@ -14,7 +20,8 @@ class MaxHeap {
     this.count = 0
     this.data = []
   }
-  private constructorByArray(array) {
+  // heapify
+  private heapify(array) {
     this.data = Array.from({ length: 1 }).concat(array)
     this.count = array.length
     for (let i = this.getParentIndex(this.count); i >= 1; i--) {

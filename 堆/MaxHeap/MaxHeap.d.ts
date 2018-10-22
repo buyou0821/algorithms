@@ -1,9 +1,16 @@
+/**
+ * 数组索引从1开始
+ * parent(i) = Math.floor(i / 2)
+ * leftchild(i) = 2 * i
+ * rightChild(i) = 2 * i + 1
+ * 最后一个非叶子节点 = parent(count)
+ */
 declare class MaxHeap {
     private data;
     private count;
     constructor(array?: any);
     private constructorDefault();
-    private constructorByArray(array);
+    private heapify(array);
     getSize(): number;
     isEmpty(): boolean;
     insert(item: number): void;
